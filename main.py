@@ -61,7 +61,7 @@ def text_generator(state_dict):
         out = sample_sequence(
             model=model, length=args.length,
             context=context_tokens  if not  args.unconditional else None,
-            start_token=enc.encoder['<|endoftext|>'] if args.unconditional else None,
+            start_token=enc.encoder['<|endoftext|>'] if args.unconditional else None, # enc.encoder['<|endoftext|>'] = 50256
             batch_size=args.batch_size,
             temperature=args.temperature, top_k=args.top_k, device=device
         )
