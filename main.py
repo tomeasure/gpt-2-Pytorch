@@ -54,7 +54,7 @@ def text_generator(state_dict):
         raise ValueError("Can't get samples longer than window size: %s" % config.n_ctx)
 
     print(args.text)
-    context_tokens = enc.encode(args.text)
+    context_tokens = enc.encode(args.text) # 1D, list
 
     generated = 0
     for _ in range(args.nsamples // args.batch_size):
