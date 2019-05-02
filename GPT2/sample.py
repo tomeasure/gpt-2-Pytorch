@@ -21,7 +21,7 @@ def sample_sequence(model, length, start_token=None, batch_size=None, context=No
     else:
         assert context is None, 'Specify exactly one of start_token and context!'
         context = torch.full((batch_size, 1), start_token, device=device, dtype=torch.long)
-    prev = context
+    prev = context # 2D, tensor, (batch_size, 1)
     output = context
     past = None
     with torch.no_grad():
