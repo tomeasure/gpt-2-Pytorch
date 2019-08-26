@@ -81,9 +81,9 @@ class Attention(nn.Module):
     def forward(self, x, layer_past=None):
         x = self.c_attn(x)
         query, key, value = x.split(self.split_size, dim=2)
-        query = self.split_heads(query)
-        key = self.split_heads(key, k=True)
-        value = self.split_heads(value)
+        query = self.split_heads(query) # [60, 1, 768] -> [60, 12, 1, 64]
+        key = self.split_heads(key, k=True) # [60, 1, 768] -> [60, 12, 64, 1]
+        value = self.split_heads(value) # [60, 1, 768] -> [60, 12, 1, 64]
         if layer_past is not None:
             past_key, past_value = layer_past[0].transpose(-2, -1), layer_past[1]  # transpose back cf below
             key = torch.cat((past_key, key), dim=-1)
